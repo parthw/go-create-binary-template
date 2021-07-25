@@ -7,6 +7,6 @@ This contains golang boilerplate code to write handy hacky small binaries.
 For pre-commit to work, please execute the following commands -
 
 ```
-go get -u golang.org/x/lint/golint
+go get -u github.com/securego/gosec/v2/cmd/gosec
 go get golang.org/x/tools/cmd/goimports
 ```

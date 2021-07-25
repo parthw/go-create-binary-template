@@ -12,19 +12,17 @@ for FILE in $STAGED_GO_FILES; do
 
   goimports -w $FILE
 
-  golint "-set_exit_status" $FILE
-  if [[ $? == 1 ]]; then
-    PASS=false
-  fi
-  printf "golint executed successfully\n"
-  
   go vet $FILE
   if [[ $? != 0 ]]; then
     PASS=false
   fi
-  printf "go vet executed successfully\n"
 
 done
+
+gosec ./...
+if [[ $? != 0 ]]; then
+  PASS=false
+fi
 
 if ! $PASS; then
   printf "COMMIT FAILED\n"
