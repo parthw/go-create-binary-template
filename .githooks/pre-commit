@@ -16,21 +16,21 @@ for FILE in $STAGED_GO_FILES; do
   if [[ $? == 1 ]]; then
     PASS=false
   fi
-  echo "golint executed successfully"
+  printf "golint executed successfully\n"
   
   go vet $FILE
   if [[ $? != 0 ]]; then
     PASS=false
   fi
-  echo "go vet executed successfully"
+  printf "go vet executed successfully\n"
 
 done
 
 if ! $PASS; then
-  echo "COMMIT FAILED"
+  printf "COMMIT FAILED\n"
   exit 1
 else
-  echo "COMMIT SUCCEEDED"
+  printf "COMMIT SUCCEEDED\n"
 fi
 
 exit 0
