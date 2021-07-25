@@ -9,15 +9,13 @@ fi
 PASS=true
 
 for FILE in $STAGED_GO_FILES; do
-
   goimports -w $FILE
-
-  go vet $FILE
-  if [[ $? != 0 ]]; then
-    PASS=false
-  fi
-
 done
+
+go vet
+if [[ $? != 0 ]]; then
+  PASS=false
+fi
 
 gosec ./...
 if [[ $? != 0 ]]; then
