@@ -25,7 +25,8 @@ fi
 if ! $PASS; then
   printf "COMMIT FAILED\n"
   exit 1
+else
+  printf "COMMIT SUCCEEDED\n"
 fi
 
-printf "COMMIT SUCCEEDED\n"
 exit 0
