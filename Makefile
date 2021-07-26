@@ -1,6 +1,5 @@
 PROJECTNAME=$(shell basename $(PWD))
-COMMIT=$(shell git rev-parse --short HEAD)
-GO_LDFLAGS=-ldflags "-X main.Version=v1.0.0|commit="$(COMMIT)""
+GO_LDFLAGS=-ldflags "-X main.Version=`git tag --sort=-version:refname | head -n 1`"
 PLATFORMS=darwin windows
 
 # Make is verbose in Linux. Made it silent
