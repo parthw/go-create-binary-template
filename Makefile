@@ -14,6 +14,11 @@ help : Makefile
 	sed -n 's/^## //p' $<
 	sed -n 's/^###/ /p' $<
 
+### bootstrap: To bootstrap the template
+.PHONY: bootstrap
+bootstrap:
+	find . -type f -not -path '*/\.*' -exec sed -i "s/go-create-binary-template/`basename $PWD`/g" {} +
+
 ### build: To build the binary in bin directory
 .PHONY: build
 build:

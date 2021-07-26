@@ -31,20 +31,14 @@ func Execute() {
 
 func init() {
 	cobra.OnInitialize(initConfig)
-
-	// Here you will define your flags and configuration settings.
-	// Cobra supports persistent flags, which, if defined here,
-	// will be global for your application.
-
 	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.go-create-binary-template.yaml)")
-
-	// Cobra also supports local flags, which will only run
-	// when this action is called directly.
-	rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }
 
 // initConfig reads in config file and ENV variables if set.
 func initConfig() {
+	// Setting the default configuration
+	defaultConfig()
+
 	if cfgFile != "" {
 		// Use config file from the flag.
 		viper.SetConfigFile(cfgFile)
@@ -67,4 +61,13 @@ func initConfig() {
 
 	// Initializing Logger of application
 	logger.InitializeLogger()
+}
+
+func defaultConfig() {
+	viper.SetDefault("log.type", "console")
+	viper.SetDefault("log.file", "go-create-binary-template.log")
+	viper.SetDefault("log.file.maxsize", "100") //megabytes
+	viper.SetDefault("log.file.maxbackups", "5")
+	viper.SetDefault("log.file.maxage", "5") //days
+	viper.SetDefault("log.level", "info")
 }

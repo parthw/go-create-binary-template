@@ -7,7 +7,6 @@ import (
 )
 
 func Hello() {
-	logger.Log.Debug("logging is working fine!")
+	logger.Log.Info("logging is working fine!")
 	fmt.Print("Hello World!")
-	// Teesting git hooks
 }
