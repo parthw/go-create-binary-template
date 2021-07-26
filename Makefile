@@ -25,4 +25,9 @@ build:
 .PHONY: clean
 clean:
 	rm -rfv bin/
-	mkdir bin
+
+### sanity-check: To execute lint, errors and security checks
+.PHONY: sanity-check
+sanity-check:
+	go vet 
+	gosec ./...
