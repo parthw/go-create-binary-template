@@ -1,6 +1,6 @@
 PROJECTNAME=$(shell basename $(PWD))
 GO_LDFLAGS=-ldflags "-X main.Version=`git tag --sort=-version:refname | head -n 1`"
-PLATFORMS=darwin windows
+PLATFORMS=darwin windows linux
 
 # Make is verbose in Linux. Made it silent
 MAKEFLAGS += --silent
@@ -16,13 +16,14 @@ help : Makefile
 ### bootstrap: To bootstrap the template
 .PHONY: bootstrap
 bootstrap:
-	find . -type f -name '*.go' -not -path '*/\.*' -exec sed -i '' "s/go-create-binary-template/`basename ${PWD}`/g" {} +
+	find . -type f -name '*.go' -not -path '*/\.*' -exec sed -i '' "s/go-create-binary-template/${PROJECTNAME}/g" {} +
 
 ### build: To build the binary in bin directory
 .PHONY: build
 build:
 	$(foreach GOOS, $(PLATFORMS),\
-	$(shell export GOOS=$(GOOS); mkdir -p bin && cd bin && go build $(GO_LDFLAGS) ../ ))
+	$(shell mkdir -p bin && cd bin && env GOOS=$(GOOS) GOARCH=amd64 go build $(GO_LDFLAGS) -o ${PROJECTNAME}-${GOOS} ../ ))
+	mv bin/${PROJECTNAME}-{windows,windows.exe}
 	echo "Binaries are successfully built."
 
 ### clean: To remove the binaries 
