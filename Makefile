@@ -17,6 +17,7 @@ help : Makefile
 .PHONY: bootstrap
 bootstrap:
 	find . -type f -name '*.go' -not -path '*/\.*' -exec sed -i '' "s/go-create-binary-template/${PROJECTNAME}/g" {} +
+	sed -i '' "s/go-create-binary-template/${PROJECTNAME}/g" go.mod
 
 ### build: To build the binary in bin directory
 .PHONY: build
