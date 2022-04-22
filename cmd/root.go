@@ -30,6 +30,7 @@ func Execute() {
 }
 
 func init() {
+	fmt.Println("root init")
 	cobra.OnInitialize(initConfig)
 	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.go-create-binary-template.yaml)")
 }
@@ -64,7 +65,7 @@ func initConfig() {
 }
 
 func defaultConfig() {
-	viper.SetDefault("log.type", "console")
+	viper.SetDefault("log.type", "json")
 	viper.SetDefault("log.file", "go-create-binary-template.log")
 	viper.SetDefault("log.file.maxsize", "100") //megabytes
 	viper.SetDefault("log.file.maxbackups", "5")

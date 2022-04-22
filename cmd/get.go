@@ -3,6 +3,7 @@ package cmd
 import (
 	"fmt"
 
+	"github.com/parthw/go-create-binary-template/internal/hello"
 	"github.com/spf13/cobra"
 )
 
@@ -18,10 +19,12 @@ This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("get called")
+		hello.Hello()
 	},
 }
 
 func init() {
+	fmt.Println("get init called")
 	rootCmd.AddCommand(getCmd)
 
 	// Here you will define your flags and configuration settings.
